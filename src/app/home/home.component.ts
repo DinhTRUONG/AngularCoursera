@@ -4,6 +4,7 @@ import { DishService } from '../services/dish.service';
 import { Promotion } from '../shared/promotion';
 import { PromotionService } from '../services/promotion.service';
 import { LeaderService } from './../services/leader.service';
+import { Leader } from '../shared/leader';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import { LeaderService } from './../services/leader.service';
 export class HomeComponent implements OnInit {
   dish: Dish;
   promotion: Promotion;
-  leader: any;
+  leader: Leader;
 
   constructor(
     private dishService: DishService,
