@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +35,8 @@ import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
 import { LoginComponent } from './login/login.component';
 
+import { baseurl } from './shared/baseUrl';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +55,7 @@ import { LoginComponent } from './login/login.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
 
     MatToolbarModule,
     FlexLayoutModule,
@@ -69,7 +73,11 @@ import { LoginComponent } from './login/login.component';
     MatSliderModule
   ],
   entryComponents: [LoginComponent],
-  providers: [DishService, LeaderService],
+  providers: [
+    DishService,
+    LeaderService,
+    { provide: 'BaseURL', useValue: baseurl }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
