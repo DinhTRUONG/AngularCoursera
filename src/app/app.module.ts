@@ -34,6 +34,7 @@ import { ContactComponent } from './contact/contact.component';
 import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
 import { LoginComponent } from './login/login.component';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 import { baseurl } from './shared/baseUrl';
 
@@ -76,6 +77,7 @@ import { baseurl } from './shared/baseUrl';
   providers: [
     DishService,
     LeaderService,
+    ProcessHTTPMsgService,
     { provide: 'BaseURL', useValue: baseurl }
   ],
   bootstrap: [AppComponent]
