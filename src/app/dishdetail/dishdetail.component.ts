@@ -18,10 +18,11 @@ export class DishdetailComponent implements OnInit {
   dishIds: string[];
   prev: string;
   next: string;
+  dishcopy: Dish;
   min = 0;
   max = 5;
   step = 1;
-
+  errMess: string;
   formErrors = {
     author: '',
     rating: '',
@@ -56,10 +57,14 @@ export class DishdetailComponent implements OnInit {
       .pipe(
         switchMap((params: Params) => this.dishService.getDish(params['id']))
       )
-      .subscribe(dish => {
-        this.dish = dish;
-        this.setPrevNext(dish.id);
-      });
+      .subscribe(
+        dish => {
+          this.dish = dish;
+          this.dishcopy = dish;
+          this.setPrevNext(dish.id);
+        },
+        errmess => (this.errMess = errmess)
+      );
   }
 
   setPrevNext(dishId: string) {
@@ -115,5 +120,21 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.dish.comments.push({ ...this.commentForm.value, date: new Date() });
     this.feedbackFormDirective.resetForm();
+
+    this.dishcopy.comments.push({
+      ...this.commentForm.value,
+      date: new Date()
+    });
+    this.dishService.putDish(this.dishcopy).subscribe(
+      dish => {
+        this.dish = dish;
+        this.dishcopy = dish;
+      },
+      errmess => {
+        this.dish = null;
+        this.dishcopy = null;
+        this.errMess = errmess;
+      }
+    );
   }
 }
