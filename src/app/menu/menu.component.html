@@ -9,6 +9,7 @@
     <mat-grid-list cols="2" rowHeight="200px">
       <mat-grid-tile
         *ngFor="let dish of dishes"
+        appHighlight
         [routerLink]="['/dishdetail', dish.id]"
       >
         <img
